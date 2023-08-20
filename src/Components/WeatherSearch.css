@@ -1,0 +1,17 @@
+.weather-search-container {
+    text-align: center;
+  }
+  
+  .location-input {
+    padding: 10px;
+    margin-right: 10px;
+  }
+  
+  .search-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  

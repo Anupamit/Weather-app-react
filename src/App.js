@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import axios from 'axios';
+import WeatherSearch from './Components/WeatherSeach';
+import WeatherCard from './Components/WeatherCard';
 
-function App() {
+
+const API_KEY = '1cb6532aea3c298a830a71380eace21e';
+
+const App = () => {
+  const [weatherData, setWeatherData] = useState(null);
+
+  const fetchWeatherData = async (location) => {
+    try {
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${API_KEY}`
+      );
+      
+      setWeatherData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <WeatherSearch onSearch={fetchWeatherData} />
+      <WeatherCard weatherData={weatherData} />
     </div>
   );
-}
+};
 
 export default App;
